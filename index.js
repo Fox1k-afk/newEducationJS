@@ -83,26 +83,26 @@ function div(a, b) {
 function showResult(numbers, action, result) {
 	console.log(`${numbers.join(` ${action} `)} = ${result}`);
 }
+
 ///////////////////////// second variation, probably bad ;(
+
 // let operators = ['+', '-', '*', '/'],
-// 	operation = getOperation(),
+// 	operation,
 // 	question,
 // 	count = 0,
 // 	operand,
 // 	total = 0;
+// while (
+// 	!operators.includes((operation = prompt(`Choose operation (+, -, * or /)`)))
+// );
 
-// function getOperation(operation) {
-// 	while (!operators.includes(operation)) {
-// 		return prompt(`Choose operation ${operators.join(', ')}`, '+');
-// 	}
-// }
 // do {
 // 	question = prompt(
 // 		`How many operands do you want to use? (More than 1 less than 5)`,
 // 		2
 // 	);
 // 	count = +question;
-// } while (count !== parseInt(question) || count < 2 || count > 4);
+// } while (count !== parseInt(question) || count < 2 || count > 5);
 
 // let x = [];
 // for (let i = 1; i <= count; i++) {
@@ -112,6 +112,7 @@ function showResult(numbers, action, result) {
 // 	} while (operand !== parseFloat(question) || !Number.isFinite(operand));
 // 	x.push(operand);
 // }
+
 // total = x[0];
 // for (let i = 1; i < count; i++) {
 // 	switch (operation) {
@@ -130,5 +131,3 @@ function showResult(numbers, action, result) {
 // 	}
 // }
 // console.log(`${x.join(` ${operation} `)} = ${total}`);
-
-//done
