@@ -130,3 +130,5 @@ function showResult(numbers, action, result) {
 // 	}
 // }
 // console.log(`${x.join(` ${operation} `)} = ${total}`);
+
+//done
