@@ -1,132 +1,71 @@
-const ACTIONS = { '+': add, '-': sub, '*': mul, '/': div };
-const ACTION_LIST = Object.keys(ACTIONS);
+let s = 1;
+factorial(3);
+// factorial(5);
+function factorial(n) {
+	if (n === 0) return;
+	s = s * n;
+	factorial(n - 1);
+}
+console.log(s);
 
-main();
-function main() {
-	const action = getAction();
-	const operandsCount = getOperandsCount();
-	const numbers = getNumbers(operandsCount);
-	const result = calc(numbers, action);
-	showResult(numbers, action, result);
-}
+// function factorial2(n) {
+// 	return n != 1 ? n * factorial2(n - 1) : 1;
+// }
+// console.log(factorial2(5));
 
-function getAction() {
-	let res;
-	do {
-		res = prompt(`Enter operator ${ACTION_LIST.join(', ')}`, '+');
-	} while (!isValidAction(res));
-	return res;
-}
-
-function isValidAction(action) {
-	return ACTION_LIST.includes(action);
-}
-
-function getOperandsCount() {
-	let operandsCount;
-	do {
-		operandsCount = prompt('Enter operands count', 2);
-	} while (
-		!isOperandsCountValid(operandsCount) ||
-		operandsCount < 2 ||
-		operandsCount > 5
-	);
-	return Number(operandsCount);
-}
-
-function isOperandsCountValid(operand) {
-	return !isNaN(operand);
-}
-
-function getNumbers(operandsCount) {
-	const numbers = [];
-	for (let i = 1; i <= operandsCount; i++) {
-		numbers.push(getOperand(i));
-	}
-
-	return numbers;
-}
-function getOperand(operandName) {
-	let res;
-	do {
-		res = prompt(`Enter operand ${operandName}`);
-	} while (!isOperandValid(res));
-	return Number(res);
-}
-
-function isOperandValid(operand) {
-	return !isNaN(operand);
-}
-
-function calc(numbers, action) {
-	let res = numbers[0];
-
-	for (let i = 1; i < numbers.length; i++) {
-		res = ACTIONS[action](res, numbers[i]);
-	}
-	return res;
-}
-
-function add(a, b) {
-	return a + b;
-}
-function sub(a, b) {
-	return a - b;
-}
-function mul(a, b) {
-	return a * b;
-}
-function div(a, b) {
-	return a / b;
-}
-
-function showResult(numbers, action, result) {
-	console.log(`${numbers.join(` ${action} `)} = ${result}`);
-}
-///////////////////////// second variation, probably bad ;(
-// let operators = ['+', '-', '*', '/'],
-// 	operation = getOperation(),
-// 	question,
-// 	count = 0,
-// 	operand,
-// 	total = 0;
-
-// function getOperation(operation) {
-// 	while (!operators.includes(operation)) {
-// 		return prompt(`Choose operation ${operators.join(', ')}`, '+');
+// function factorial3(n, res) {
+// 	res = res || 1;
+// 	if (!n) {
+// 		return res;
+// 	} else {
+// 		return factorial3(n - 1, res * n);
 // 	}
 // }
-// do {
-// 	question = prompt(
-// 		`How many operands do you want to use? (More than 1 less than 5)`,
-// 		2
-// 	);
-// 	count = +question;
-// } while (count !== parseInt(question) || count < 2 || count > 4);
+// console.log(factorial3(0));
 
-// let x = [];
-// for (let i = 1; i <= count; i++) {
-// 	do {
-// 		question = prompt(`Enter ${i}-th number`);
-// 		operand = +question;
-// 	} while (operand !== parseFloat(question) || !Number.isFinite(operand));
-// 	x.push(operand);
-// }
-// total = x[0];
-// for (let i = 1; i < count; i++) {
-// 	switch (operation) {
-// 		case '+':
-// 			total += x[i];
-// 			break;
-// 		case '-':
-// 			total -= x[i];
-// 			break;
-// 		case '*':
-// 			total *= x[i];
-// 			break;
-// 		case '/':
-// 			total /= x[i];
-// 			break;
+// function factorial4(num) {
+// 	if (num === 1) {
+// 		return 1;
+// 	} else if (num === 0) {
+// 		return 1;
+// 	} else {
+// 		return num * factorial4(num - 1);
 // 	}
 // }
-// console.log(`${x.join(` ${operation} `)} = ${total}`);
+// console.log(factorial4(5));
+
+// let factorial5 = function (value) {
+// 	if (value > 0) {
+// 		console.log(value);
+// 		return factorial5(value - 1);
+// 	} else {
+// 		return value;
+// 	}
+// };
+// factorial5(5);
+
+// console.log(max([1, 8, 37, 5, 16]));
+// function max(arr) {
+// 	arr.reduce(function (acc, curr) {
+// 		if (curr > acc) {
+// 			return curr;
+// 		}
+// 		return acc;
+// 	}, 0);
+// }
+
+function max(arr) {
+	return arr.reduce(function (p, v) {
+		return p > v ? p : v;
+	});
+}
+console.log(max([8]), 'one element test, must return 8');
+console.log(max([1, 8, 37, 5, 17]), '5 elements test, must return 37');
+console.log(max([8, 17]), '2 elements test, must return 17');
+
+// function max2(arr) {
+// 	return arr.reduce((a, b) => Math.max(a, b));
+// }
+// console.log(max2([8]), 'one element test, must return 8');
+// console.log(max2([1, 8, 37, 5, 17]), '5 elements test, must return 37');
+// console.log(max2([8, 17]), '2 elements test, must return 17');
