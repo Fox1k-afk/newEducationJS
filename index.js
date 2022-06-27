@@ -1,132 +1,39 @@
-const ACTIONS = { '+': add, '-': sub, '*': mul, '/': div };
-const ACTION_LIST = Object.keys(ACTIONS);
+const calculator = createCalculator(100);
 
-main();
-function main() {
-	const action = getAction();
-	const operandsCount = getOperandsCount();
-	const numbers = getNumbers(operandsCount);
-	const result = calc(numbers, action);
-	showResult(numbers, action, result);
-}
+// calculator.add(10); // 110 - это текущее значение base
+// calculator.add(10); // 120
+// calculator.sub(20); // 100
 
-function getAction() {
-	let res;
-	do {
-		res = prompt(`Enter operator ${ACTION_LIST.join(', ')}`, '+');
-	} while (!isValidAction(res));
-	return res;
-}
+// calculator.set(20); // 20
+// calculator.add(10); // 30
+// calculator.add(10); // 40
+// calculator.add('qwe'); // NaN и значение 40 не менять
+// console.log(calculator.get()); // 40
 
-function isValidAction(action) {
-	return ACTION_LIST.includes(action);
-}
-
-function getOperandsCount() {
-	let operandsCount;
-	do {
-		operandsCount = prompt('Enter operands count', 2);
-	} while (
-		!isOperandsCountValid(operandsCount) ||
-		operandsCount < 2 ||
-		operandsCount > 5
-	);
-	return Number(operandsCount);
-}
-
-function isOperandsCountValid(operand) {
-	return !isNaN(operand);
-}
-
-function getNumbers(operandsCount) {
-	const numbers = [];
-	for (let i = 1; i <= operandsCount; i++) {
-		numbers.push(getOperand(i));
+function createCalculator(base) {
+	if (!isNumber(base)) {
+		// console.error('Base must be a number')
+		// return
+		// throw new Error('Base must be a number');
+		base = 0;
 	}
 
-	return numbers;
-}
-function getOperand(operandName) {
-	let res;
-	do {
-		res = prompt(`Enter operand ${operandName}`);
-	} while (!isOperandValid(res));
-	return Number(res);
-}
-
-function isOperandValid(operand) {
-	return !isNaN(operand);
-}
-
-function calc(numbers, action) {
-	let res = numbers[0];
-
-	for (let i = 1; i < numbers.length; i++) {
-		res = ACTIONS[action](res, numbers[i]);
-	}
-	return res;
+	return {
+		// add: (num) => {
+		// 	if (!isNumber(num)) {
+		// 		base += num;
+		// 	}
+		// },
+		// sub: (num) => {
+		// 	if (!isNumber(num)) {
+		// 		base -= num;
+		// 	}
+		// },
+		add: (num) => (base += isNumber(num) ? num : 0),
+		sub: (num) => (base -= isNumber(num) ? num : 0),
+	};
 }
 
-function add(a, b) {
-	return a + b;
+function isNumber(num) {
+	return !isNaN(num);
 }
-function sub(a, b) {
-	return a - b;
-}
-function mul(a, b) {
-	return a * b;
-}
-function div(a, b) {
-	return a / b;
-}
-
-function showResult(numbers, action, result) {
-	console.log(`${numbers.join(` ${action} `)} = ${result}`);
-}
-///////////////////////// second variation, probably bad ;(
-// let operators = ['+', '-', '*', '/'],
-// 	operation = getOperation(),
-// 	question,
-// 	count = 0,
-// 	operand,
-// 	total = 0;
-
-// function getOperation(operation) {
-// 	while (!operators.includes(operation)) {
-// 		return prompt(`Choose operation ${operators.join(', ')}`, '+');
-// 	}
-// }
-// do {
-// 	question = prompt(
-// 		`How many operands do you want to use? (More than 1 less than 5)`,
-// 		2
-// 	);
-// 	count = +question;
-// } while (count !== parseInt(question) || count < 2 || count > 4);
-
-// let x = [];
-// for (let i = 1; i <= count; i++) {
-// 	do {
-// 		question = prompt(`Enter ${i}-th number`);
-// 		operand = +question;
-// 	} while (operand !== parseFloat(question) || !Number.isFinite(operand));
-// 	x.push(operand);
-// }
-// total = x[0];
-// for (let i = 1; i < count; i++) {
-// 	switch (operation) {
-// 		case '+':
-// 			total += x[i];
-// 			break;
-// 		case '-':
-// 			total -= x[i];
-// 			break;
-// 		case '*':
-// 			total *= x[i];
-// 			break;
-// 		case '/':
-// 			total /= x[i];
-// 			break;
-// 	}
-// }
-// console.log(`${x.join(` ${operation} `)} = ${total}`);
