@@ -1,28 +1,90 @@
-/// DOM <<<<<
+const EDIT_BTN_CLASS = '.editBtn';
+const DELETE_BTN_CLASS = '.deleteBtn';
+const CONTACT_ITEM_SELECTOR = '.contactItem';
 
-// document.querySelector('.class/id');
-// document.querySelectorAll('.class/id/');
+const contactForm = document.querySelector('#newContactForm');
+const inputs = document.querySelectorAll('.form-input');
+const contactTemplate = document.querySelector('#contactTemplate').innerHTML;
+const contactList = document.querySelector('#contactList');
 
-// .value
-// .className
-// .classList
-// .dataset
-// .style
-// .attributes
-// .setAttribute()
+// document.querySelector('#table').addEventListener('keyup', (e) => {
+// 	console.log(e.key, e.code);
+// 	if (e.key === 'Enter') {
+// 		onContactFormSubmit(e)
+// 	}
+// });
 
-// const liEl = document.createElement('li'); // создаем элем
+contactForm.addEventListener('submit', onContactFormSubmit);
+contactList.addEventListener('click', onContactListClick);
 
-// liEl.textContent = ' 7 elem'; // < задаем текст
-// // liEl.innerText = '7 elem'; // < не юзаем
+function onContactFormSubmit(e) {
+	e.preventDefault();
 
-// ul.append(liEl); // добавляет в конец
-// ul.prepend(liEl); // добавляет в начало
+	const contact = getContact();
 
-// // liEl.remove();  < удаление элема
-// // liEl = null;    < связка  с удалением
+	if (!isValidContact(contact)) {
+		showError();
+		return;
+	}
+	addContactItem();
+	clearForm();
+}
 
-// button.addEventListener('click', onButtonClick);
-// function onButtonClick() {
-// 	document.querySelector('#btn').textContent = 'Clicked';
-// }
+function onContactListClick(e) {
+	const classList = e.target.classList;
+	if (classList.contains('DELETE_BTN_CLASS')) {
+		e.target.closest('.CONTACT_ITEM_SELECTOR').remove();
+	}
+	if (classList.contains('EDIT_BTN_CLASS')) {
+		// e.target.closest('.editBtn').style.color = 'red';
+		const editBtn = getEditBtn(e);
+		editBtn.style.color = 'red';
+	}
+}
+
+function getEditBtn(element) {
+	return e.target.closest('.editBtn');
+}
+
+function getContact() {
+	const contact = {};
+
+	for (const input of inputs) {
+		contact[input.name] = input.value;
+	}
+	return contact;
+}
+
+function isValidContact(contact) {
+	return (
+		isNotEmptyString(contact.name) &&
+		isNotEmptyString(contact.surname) &&
+		isPhone(contact.phone)
+	);
+}
+function isNotEmptyString(str) {
+	return str === '';
+}
+function isPhone(phone) {
+	return isNotEmptyString(phone) && !isNaN(phone);
+}
+
+function showError() {
+	alert('Some field error');
+}
+
+function addContactItem(contact) {
+	const html = generateContactHtml(contact);
+	contactList.inserrtAdjacentHTML('beforeend', html);
+}
+
+function generateContactHtml(contact) {
+	return contactTemplate
+		.replace('{name}', contact.name)
+		.replace('{surname}', contact.surname)
+		.replace('{phone}', contact.phone);
+}
+
+function clearForm() {
+	contactForm.reset();
+}

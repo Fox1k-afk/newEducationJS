@@ -8,6 +8,35 @@
 	<link rel="stylesheet" href="style/style.css">
 </head>
 <body>
+	<form id = 'newContactForm' class="form">
+		<table id="table">
+			<tr>
+				<th>Name</th>
+				<th>Surname</th>
+				<th>Phone</th>
+				<th>Actions</th>
+			</tr>
+			<tbody id="contactList"> 			</tbody>
+			<tr>
+				<td><input type="text" name ='name' id ='nameInput' class="form-input" placeholder="Name"></td>
+				<td><input type="text" name ='surnmae' id ='surnameInput' class="form-input" placeholder="surName"></td>
+				<td><input type="text" name ='phone' id ='phoneInput' class="form-input" placeholder="Phone"></td>
+				<td><button id="addContactBtn">Add</button></td>
+			</tr>
+		</table>
+	</form>
+
+	<script id="contactTemplate" type="text/template"> 
+		<tr class= 'contactItem'> 
+			<td>{name}</td>
+			<td>{surname}</td>
+			<td>{phone}</td>
+			<td> 
+				<button type ='button' class='deleteBtn'>Delete</button>
+				<button type ='button' class='editBtn'>Edit</button>
+			</td>
+		</tr>
+	</script>
 
 	<script src="/index.js" ></script>
 </body>
