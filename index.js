@@ -1,18 +1,11 @@
-const EDIT_BTN_CLASS = '.editBtn';
-const DELETE_BTN_CLASS = '.deleteBtn';
+const EDIT_BTN_CLASS = 'editBtn';
+const DELETE_BTN_CLASS = 'deleteBtn';
 const CONTACT_ITEM_SELECTOR = '.contactItem';
 
 const contactForm = document.querySelector('#newContactForm');
 const inputs = document.querySelectorAll('.form-input');
 const contactTemplate = document.querySelector('#contactTemplate').innerHTML;
 const contactList = document.querySelector('#contactList');
-
-// document.querySelector('#table').addEventListener('keyup', (e) => {
-// 	console.log(e.key, e.code);
-// 	if (e.key === 'Enter') {
-// 		onContactFormSubmit(e)
-// 	}
-// });
 
 contactForm.addEventListener('submit', onContactFormSubmit);
 contactList.addEventListener('click', onContactListClick);
@@ -26,24 +19,25 @@ function onContactFormSubmit(e) {
 		showError();
 		return;
 	}
-	addContactItem();
+	addContactItem(contact);
 	clearForm();
 }
 
 function onContactListClick(e) {
 	const classList = e.target.classList;
-	if (classList.contains('DELETE_BTN_CLASS')) {
-		e.target.closest('.CONTACT_ITEM_SELECTOR').remove();
+
+	if (classList.contains(EDIT_BTN_CLASS)) {
+		const contactItem = getContactItem(e.target);
+
+		contactItem.style.color = 'red';
 	}
-	if (classList.contains('EDIT_BTN_CLASS')) {
-		// e.target.closest('.editBtn').style.color = 'red';
-		const editBtn = getEditBtn(e);
-		editBtn.style.color = 'red';
+	if (classList.contains(DELETE_BTN_CLASS)) {
+		e.target.closest(CONTACT_ITEM_SELECTOR).remove();
 	}
 }
 
-function getEditBtn(element) {
-	return e.target.closest('.editBtn');
+function getContactItem(element) {
+	return element.closest(CONTACT_ITEM_SELECTOR);
 }
 
 function getContact() {
@@ -63,7 +57,7 @@ function isValidContact(contact) {
 	);
 }
 function isNotEmptyString(str) {
-	return str === '';
+	return str !== '';
 }
 function isPhone(phone) {
 	return isNotEmptyString(phone) && !isNaN(phone);
@@ -75,7 +69,8 @@ function showError() {
 
 function addContactItem(contact) {
 	const html = generateContactHtml(contact);
-	contactList.inserrtAdjacentHTML('beforeend', html);
+
+	contactList.insertAdjacentHTML('beforeend', html);
 }
 
 function generateContactHtml(contact) {
