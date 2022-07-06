@@ -1,11 +1,10 @@
 const DELETE_BTN_CLASS = 'deleteBtn';
 const EDIT_BTN_CLASS = 'editBtn';
 
+const toDoForm = document.querySelector('#toDoForm');
 const todoList = document.querySelector('.todo__list');
 const input = document.querySelector('#inputDoing');
-const button = document.querySelector('#btn');
 const toDoTemplate = document.querySelector('#toDoTemplate').innerHTML;
-const toDoForm = document.querySelector('#toDoForm');
 
 toDoForm.addEventListener('submit', onToDoFormSubmit);
 todoList.addEventListener('click', onTodoListClick);
@@ -44,7 +43,6 @@ function onTodoListClick(e) {
 		}
 
 		if (e.target.classList.contains(DELETE_BTN_CLASS)) {
-			console.log('edit');
 			return;
 		}
 
