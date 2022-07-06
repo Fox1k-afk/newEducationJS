@@ -11,17 +11,25 @@
 <div class="container">
 	<div class="todo__body">
 <ul class="todo__list">
+	
 </ul>
 	</div>
-	<form action="#", method="get">
+	<form action="#", method="get" id="toDoForm">
 		<input id="inputDoing" type="text", placeholder = 'what i must to do', autofocus>
-	</form>
-	<div>
 		<button id="btn">
 			Click me
 		</button>
-	</div>
+	</form>
 </div>
+
+<script id="toDoTemplate" type="text/button">
+<li class='liItem'> 
+	{doList
+	<button type = 'button' class = 'deleteBtn'>[Delete]</button>
+	<button type = 'button' class = 'editBtn'>[Edit]</button>
+	
+</li>
+</script>
 
 	<script src="/index.js" ></script>
 </body>
