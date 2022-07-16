@@ -1,33 +1,42 @@
-function Calculator(base) {
-	if (!isNumber(base)) {
-		base = 0;
-	}
-	this.base = base; // храним результат последней операции
+'use strict';
 
-	this.add = function (num) {
-		this.base += isNumber(num) ? num : 0;
-	};
-	this.sub = function (num) {
-		this.base -= isNumber(num) ? num : 0;
-	};
-	this.set = function (num) {
-		this.base = num;
-	};
-	this.get = function () {
-		this.base;
-	};
+function Hamburger(size) {
+	this.price = size.price;
+	this.callories = size.callories;
 }
 
-function isNumber(num) {
-	return !isNaN(num);
-}
+Hamburger.prototype.getPrice = function () {
+	return this.price;
+};
 
-const calc = new Calculator(100);
+Hamburger.prototype.getCallories = function () {
+	return this.callories;
+};
 
-calc.add(10); // 110 записывает в this.base (в консоль ничего выводить не нужно)
-calc.add(10); // 120 записывает в this.base (в консоль ничего выводить не нужно)
-calc.sub(20); // 100 записывает в this.base (в консоль ничего выводить не нужно)
-calc.set(20); // 20 записывает в this.base (в консоль ничего выводить не нужно)
-calc.add(10); // 30 записывает в this.base (в консоль ничего выводить не нужно)
-calc.add('qwe'); // игнорируем все что не число и значение 30 не меняется
-calc.get(); // 30 возвращаем значение
+Hamburger.prototype.addTopping = function (topping) {
+	this.price += topping.price;
+	this.callories += topping.callories;
+};
+
+Hamburger.SIZE_SMALL = {
+	price: 100,
+	callories: 500,
+};
+
+Hamburger.TOPPING_MAYO = {
+	price: 10,
+	callories: 100,
+};
+Hamburger.TOPPING_POTATO = {
+	price: 15,
+	callories: 150,
+};
+
+const hamburger = new Hamburger(Hamburger.SIZE_SMALL);
+
+hamburger.addTopping(Hamburger.TOPPING_MAYO);
+hamburger.addTopping(Hamburger.TOPPING_POTATO);
+hamburger.addTopping(Hamburger.TOPPING_POTATO);
+
+console.log('Price with sauce: ' + hamburger.getPrice());
+console.log('Callories with sauce: ' + hamburger.getCallories());
