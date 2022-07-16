@@ -30,6 +30,16 @@
 
 // Для простоты: Лексическое Окружение === Область видимости === Scope
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /// DOM <<<<<
 
 // document.querySelector('.class/id');
@@ -59,7 +69,18 @@
 // 	document.querySelector('#btn').textContent = 'Clicked';
 // }
 
-//// OOP
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+////////////// OOP
 // const person = {
 // 	name: 'John',
 // 	sayHi: function () {
@@ -134,3 +155,133 @@
 // counter3.inc();
 
 // console.log(counter3.counts);
+//
+//
+//
+//
+//
+//
+/////////////////////// КЛАССЫ
+// class Person {
+// 	role = 'guest';
+
+// 	constructor(name, role) {
+// 		this.name = name;
+
+// 		if (role) {
+// 			this.role = role;
+// 		}
+// 	}
+
+// 	sayHi() {
+// 		console.log('Tratata');
+// 	}
+// 	['say' + 'Hi2']() {
+// 		console.log('Tratata');
+// 	}
+
+// 	get name() {
+// 		console.log(`Getter was called`, this._name);
+// 		return this._name;
+// 	}
+
+// 	set name(value) {
+// 		console.log(`Setter was called`, this._name);
+
+// 		if (typeof value === 'string') {
+// 			this._name = value;
+// 		}
+// 	}
+// }
+
+// const john = new Person('John');
+
+//.. статический метод
+
+// class Article {
+// 	static FORMAT = {
+// 		text: 'bold',
+// 		color: 'red',
+// 	};
+
+// 	constructor(format) {
+// 		this.format = format;
+// 	}
+
+// 	publish() {
+// 		console.log(this.FORMAT);
+// 	}
+
+// 	static publish2() {
+// 		console.log(Article.FORMAT);
+// 	}
+// }
+
+// const article = new Article();
+
+// article.publish();
+
+// Article.publish2();
+
+//.. наследование Классов
+
+// class Vehicle {
+// 	setColor(color) {
+// 		this.color = color;
+// 	}
+// }
+
+// class Car extends Vehicle {
+// 	constructor(isLightOn) {
+// 		super();
+// 		this.isLightOn = isLightOn;
+// 	}
+// }
+
+// const car = new Car();
+
+// car.setColor('red');
+
+// console.log(car.color);
+
+// class Vehicle {
+// 	constructor(color) {
+// 		this.color = color;
+// 	}
+
+// 	setColor(color) {
+// 		this.color = color;
+// 	}
+// }
+
+// class Car extends Vehicle {
+// 	constructor(color, isLightOn) {
+// 		super(color);
+// 		this.isLightOn = isLightOn;
+// 	}
+// }
+
+// class Airplane extends Vehicle {}
+
+// const car = new Car('red', true);
+// const airplane = new Airplane('green');
+
+// console.log(car);
+// console.log(airplane);
+
+//.. Приватные свойства
+
+// class Calculator {
+// 	#base;
+// 	constructor(base) {
+// 		this.#base = base;
+// 	}
+// 	add(num) {
+// 		if (!isNaN(num)) {
+// 			this.#base += num;
+// 		}
+// 	}
+// }
+
+// const calc = new Calculator(10);
+// calc.add(10);
