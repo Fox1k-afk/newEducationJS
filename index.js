@@ -1,3 +1,20 @@
+// Наследование - это механизм позволяющий создать новый объект на основе уже существующего,
+// при этом свойства и функциональность родительского объекта заимствуются новым объектом.
+
+// Полиморфизм - мы можем поменять имплементацию у наследников
+
+// Инкапсуляция - это сокрытие реализации.
+
+// - Т.е. мы скрываем часть логики как работает наше приложение для того чтобы убрать сложность,
+// чтоб для того кто будет использовать наш клас не задумывался о внутреннем устройстве.
+
+// - Другая причина чтобы никто не смог к нам внедрится и что-то сломать.
+
+// контекст === this === объект в рамках которого вызывается ф.
+
+// данные - храним в объекте
+// методы - храним в прототипе
+
 // Контекст === this - это всегда объект перед точкой.
 
 // Контекст - это объект в рамках которого вызывается функция.
@@ -285,3 +302,189 @@
 
 // const calc = new Calculator(10);
 // calc.add(10);
+
+//
+//
+//
+//
+//
+//////////////////////////////////// OOP с ютуба
+// let a = {
+// 	text: 'Hello',
+// 	color: 'red',
+// 	bold: 'true',
+// 	show: function () {
+// 		console.log(this.color);
+// 	},
+// };
+
+// let b = {
+// 	fontSize: '24px',
+// 	__proto__: a,
+// };
+
+// let c = {
+// 	fontFamily: 'Verdana',
+// 	__proto__: b,
+// };
+
+// console.log(c);
+// console.log(c.bold);
+// console.log(c.hasOwnProperty('fontFamily'));
+
+// let user = {
+// 	login: '',
+// 	password: '',
+// 	validatePassword: function () {
+// 		if (this.password.length > 6) {
+// 			return true;
+// 		} else {
+// 			return false;
+// 		}
+// 	},
+// };
+
+// user.password = 'hello123';
+// console.log(user.validatePassword());
+
+// let user_profile = {
+// 	username: '',
+// 	photo: '',
+// 	age: 0,
+// 	__proto__: user,
+// };
+
+// user_profile.age = 25;
+// user_profile.username = 'Pupkin';
+// console.log(user_profile);
+
+//.. Классы
+// class User {
+// 	constructor(username, password) {
+// 		this.username = username;
+// 		this.password = password;
+// 	}
+// 	validatePassword() {
+// 		console.log('work parent pass');
+// 		if (this.password.length > 6) {
+// 			return true;
+// 		}
+// 		return false;
+// 	}
+// }
+
+// let a = 'Ivan';
+// let b = '77777757';
+
+// const person = new User(a, b);
+// console.log(person);
+// console.log(person.username);
+// console.log(person.validatePassword());
+
+// class Student extends User {
+// 	constructor(username, password, nickname) {
+// 		super(username, password);
+// 		this.nickname = nickname;
+// 	}
+// 	getStudentCourses() {
+// 		return [1, 2];
+// 	}
+// 	validatePassword() {
+// 		super.validatePassword();
+// 		if (this.password.length > 10) {
+// 			return true;
+// 		}
+// 		return false;
+// 	}
+// }
+
+// let firstStudent = new Student(a, b, 'Fox1k');
+// console.log(firstStudent);
+// console.log(firstStudent.getStudentCourses());
+// console.log(firstStudent.validatePassword());
+
+//
+//
+// class User {
+// 	constructor(name) {
+// 		this.name = name;
+// 	}
+// 	sayHello() {
+// 		console.log(this.name + ' Hello ');
+// 		return this.name;
+// 	}
+// }
+
+// const alex = new User('Alex');
+// console.log(alex);
+
+// class Person extends User {
+// 	constructor(name, email) {
+// 		super(name);
+// 		this.email = email;
+// 	}
+// 	sayHello() {
+// 		console.log(super.sayHello());
+// 		console.log(this.email);
+// 	}
+// }
+
+// const li = new Person('li', 'li@email.ua');
+// console.log(li.sayHello());
+//
+//
+//
+// class User {
+// 	sayHello() {
+// 		console.log(this.name + ' Hello ');
+// 		return this.name;
+// 	}
+// }
+
+// const alex = new User();
+// console.log(alex.sayHello());
+
+// class Person extends User {
+// 	constructor(name) {
+// 		super();
+// 		this.name = name;
+// 	}
+// }
+
+// const li = new Person('lu');
+// console.log(li);
+//
+//
+// //
+// class User {
+// 	constructor() {
+// 		// this._name = name;
+// 	}
+// 	#test = 'Hohoho';
+// 	#url = 'https://backend.ex';
+// 	send() {
+
+// 	}
+
+// 	set name(name) {
+// 		console.log('Privat = ' + this.#test);
+// 		this._name = name.trim().toLowerCase();
+// 	}
+// 	get name() {
+// 		return this._name;
+// 	}
+// 	one() {
+// 		console.log(this.#test);
+// 	}
+// }
+// const student = new User();
+// student.name = '         Alex';
+// // student._name = 'Ivan';
+// console.log(student);
+// console.log(student.name);
+// // console.log(student.#test);
+
+// class User2 extends User {}
+// const student2 = new User2();
+// student2.one();
+// student2.name = 'Oleg';
