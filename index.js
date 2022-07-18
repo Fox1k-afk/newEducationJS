@@ -13,17 +13,17 @@ class Group {
 	}
 
 	getAverageMark() {
-		const sum = getMarksSum();
+		const sum = this.#students.reduce(
+			(acc, student) => acc + student.getAverageMark(),
+			0
+		);
 		if (!sum) {
 			return 0;
 		}
 		return sum / this.#students.length;
 	}
 	getMarksSum() {
-		return this.#students.reduce(
-			(acc, student) => acc + student.getAverageMark(),
-			0
-		);
+		return;
 	}
 }
 class Student {
