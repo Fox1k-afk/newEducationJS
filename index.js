@@ -13,17 +13,31 @@ class Group {
 	}
 
 	getAverageMark() {
-		const allMarks = this.#students.flatMap((student) => student.marks);
-
-		const sum = allMarks.reduce((a, b) => a + b);
-
-		return sum / allMarks.length;
+		const sum = getMarksSum();
+		if (!sum) {
+			return 0;
+		}
+		return sum / this.#students.length;
+	}
+	getMarksSum() {
+		return this.#students.reduce(
+			(acc, student) => acc + student.getAverageMark(),
+			0
+		);
 	}
 }
 class Student {
 	constructor(name, marks) {
 		this.name = name;
 		this.marks = marks;
+	}
+	getAverageMark() {
+		const sum = this.marks.reduce(this.sum);
+
+		return sum / this.marks.length;
+	}
+	sum(a, b) {
+		return a + b;
 	}
 }
 
